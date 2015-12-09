@@ -1,0 +1,37 @@
+The Genesis
+Why Invent Go?
+14 Dec 2015
+
+Tahir Hashmi
+tahir.hashmi@flipkart.com
+@code_martial
+
+* How It Started
+.image http://imgs.xkcd.com/comics/compiling.png
+That's Ken Thompson calling Rob Pike and Robert Griesemer, perhaps
+
+* Ken Thompson
+Born: 1943, USA
+
+.image http://www.computerhistory.org/fellowawards/media/img/fellows/1997_ken_thompson.jpg
+
+Co-creator of Unix, C and UTF-8
+IEEE Emanuel R. Piore Award (1982), Turing Award (1983), Computer Pioneer Award (1994), Computer History Museum Fellow (1997), National Medal of Technology (1998), Tsutomu Kanai Award (1999), Japan Prize (2011)
+
+_"When_in_doubt,_use_brute_force"_
+
+* Rob 'Commander' Pike
+Born: 1956, Canada
+
+.image https://c1.staticflickr.com/5/4132/4833152910_e2b5c9fcb9_z.jpg 333 500
+
+Co-creator of UTF-8, Plan 9 OS, Blit Graphical Terminal, Sam Text Editor...
+
+Co-Author of "Unix Programming Environment" (1983) and "The Practice of Programming" (1999)
+
+* Robert Griesemer
+Born: 196*, Switzerland, maybe
+
+.image https://upload.wikimedia.org/wikipedia/commons/c/ce/Robert_Griesemer.jpg 300 200
+
+Developer, Sun HotSpot JVM, Google Chubby, Chrome V8 JS Engine, Sawzall DSL, Strongtalk System

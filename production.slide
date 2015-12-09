@@ -1,0 +1,42 @@
+Go in Production
+Who's Doing It. How It's Doing
+14 Dec 2015
+
+Tahir Hashmi
+Architect, Flipkart
+tahir.hashmi@flipkart.com
+@code_martial
+
+* Release History
+
+* Go 1.1, March 2012
+- Go is standardized and made GA
+
+* Go 1.2, May 2013
+- Bigger Heaps
+- Stricter Compiler and Library
+- Race Detector
+
+* Go 1.2, Dec 2013
+- Goroutine Pre-emption
+- Limits on OS Thread Count
+- Limits on Goroutine Stack Size
+- Standard JSON, XML, Binary Encoding Packages
+- Test Coverage Tool
+
+* Go 1.3, Jun 2014
+- New OSes and Architectures
+- Contiguous goroutine stacks
+- Performance Improvements
+
+* Go 1.4, Dec 2014
+- Support for Android on ARM
+- Go runtime mostly rewritten in Go
+- Canonical Import Paths
+- go generate
+
+* Go 1.5, Aug 2015
+- Go runtime entirely rewritten in Go (+ Assembly)
+- Concurrent GC
+- Multi-core enabled by default
+- go tool trace
