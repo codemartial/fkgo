@@ -6,9 +6,64 @@ Tahir Hashmi
 tahir.hashmi@flipkart.com
 @code_martial
 
+* Contemporary Language Issues
+
+* Stylistic Convergence
+
+C++, Java, Python, PHP, Ruby
+
+- Similar way of doing OOP
+- Similar way of code organisation
+- Similar concurrent programming constructs
+- Proliferation of "design patterns"
+
+* Productivity vs Performance Tradeoff
+
+- Dynamic Typed, Interpreted languages for Productivity
+- Static Typed, Compiled languages for Performance
+- True Parallelism is Impossible or Hard
+
+* Feature Bloat
+
+- Too many concepts
+- Behavioural Exceptions and Edge Cases
+- Dialects around custom subsets
+- Variance in levels of understanding ⇒ Resident `$language` experts
+
+* Ageing Infrastructure
+
+- Profiling, testing, debugging as afterthoughts
+- Complex support for Unicode
+- Patchy support for multi-core, parallel programming
+- Compex build systems
+- Dependency abuse
+
+* Readability and Maintenance
+
+- Inline mixing of styles
+- Adherence to common style is hard
+- Dialects hurt speed, depth of comprehension
+- Over-dependence on IDEs
+- Deeply entrenched [[https://en.wikipedia.org/wiki/Yo-yo_problem][Yo-yo Problem]]
+
+* Programmer vs. Developer
+
+Do you like _Developing_?
+
+Or do you like _Programming_?
+
+.image https://c2.staticflickr.com/6/5829/23021910703_5aab780205_z.jpg
+.caption Don't serve the programming environment. Let the programming environment serve you.
+
+* 
+
+.image http://www.unixstickers.com/image/data/stickers/golang/golang.sh.png
+
 * How It Started
 .image http://imgs.xkcd.com/comics/compiling.png
-That's Ken Thompson calling Rob Pike and Robert Griesemer, perhaps
+.caption Ken Thompson calling Rob Pike and Robert Griesemer, perhaps
+
+* Meet The Gophers
 
 * Ken Thompson
 Born: 1943, USA
@@ -23,7 +78,7 @@ _"When_in_doubt,_use_brute_force"_
 * Rob 'Commander' Pike
 Born: 1956, Canada
 
-.image https://c1.staticflickr.com/5/4132/4833152910_e2b5c9fcb9_z.jpg 333 500
+.image https://c1.staticflickr.com/5/4132/4833152910_e2b5c9fcb9_z.jpg 300 _
 
 Co-creator of UTF-8, Plan 9 OS, Blit Graphical Terminal, Sam Text Editor...
 
@@ -32,6 +87,18 @@ Co-Author of "Unix Programming Environment" (1983) and "The Practice of Programm
 * Robert Griesemer
 Born: 196*, Switzerland, maybe
 
-.image https://upload.wikimedia.org/wikipedia/commons/c/ce/Robert_Griesemer.jpg 300 200
+.image https://upload.wikimedia.org/wikipedia/commons/c/ce/Robert_Griesemer.jpg 300 _
 
-Developer, Sun HotSpot JVM, Google Chubby, Chrome V8 JS Engine, Sawzall DSL, Strongtalk System
+Developer on Sun HotSpot JVM, Google Chubby, Chrome V8 Engine, Sawzall DSL, Strongtalk System
+
+* Later...
+
+*Ian*Lance*Taylor*: GCC
+
+*Russ*Cox*: Plan9, `libtask`
+
+_Also_Contributing_
+
+*Dmitry*Vyukov*: Parallel Programming Geek, Lock-free Algos
+*Brad*Fitzpatrick*: Livejournal, `memcached`, OpenID
+*Andrew*Gerrand*, *David*Symonds*, *Nigel*Tao*, *Stephen*Ma* and many more

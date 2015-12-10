@@ -9,10 +9,13 @@ tahir.hashmi@flipkart.com
 
 * Release History
 
-* Go 1.1, March 2012
+* Go 1.0, March 2012
 - Go is standardized and made GA
 
-* Go 1.2, May 2013
+(Was Conceived in late 2007; Open Sourced in November, 2009)
+
+
+* Go 1.1, May 2013
 - Bigger Heaps
 - Stricter Compiler and Library
 - Race Detector
