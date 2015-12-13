@@ -8,14 +8,15 @@ tahir.hashmi@flipkart.com
 
 * Contemporary Language Issues
 
-* Stylistic Convergence
-
-C++, Java, Python, PHP, Ruby
+* Feature Convergence of Mainstream Languages
 
 - Similar way of doing OOP
 - Similar way of code organisation
 - Similar concurrent programming constructs
 - Proliferation of "design patterns"
+
+.image http://media2.popsugar-assets.com/files/2014/05/16/800/n/1922398/242e7a6faca05ff2_2801146.xxxlarge_2x/i/Beyonc%C3%A9-Showed-Off-Early-Attempts-Cloning-Herself-2003.jpg 300 _
+.caption [[http://www.popsugar.com/celebrity/photo-gallery/34798229/image/34798279/Beyonc%C3%A9-Showed-Off-Early-Attempts-Cloning-Herself-2003][popsugar.com]]
 
 * Productivity vs Performance Tradeoff
 
@@ -23,12 +24,17 @@ C++, Java, Python, PHP, Ruby
 - Static Typed, Compiled languages for Performance
 - True Parallelism is Impossible or Hard
 
+.image https://s-media-cache-ak0.pinimg.com/736x/d6/36/1d/d6361d76921e4a28bef5246d56b164f1.jpg 300 _
+.caption [[https://www.pinterest.com/pin/402016704207527068/]]
+
 * Feature Bloat
 
 - Too many concepts
 - Behavioural Exceptions and Edge Cases
 - Dialects around custom subsets
 - Variance in levels of understanding ⇒ Resident `$language` experts
+.image http://www.gamingdebugged.com/wp-content/uploads/2013/01/the-feature-creep1-620x350.jpg 300 _
+.caption [[http://www.wengerna.com/giant-knife-16999]]
 
 * Ageing Infrastructure
 
@@ -38,13 +44,18 @@ C++, Java, Python, PHP, Ruby
 - Compex build systems
 - Dependency abuse
 
+.image http://blogs.discovermagazine.com/gnxp/files/2010/10/circa-1900-harry-grant-dart-crop-paleo-future.jpg
+.caption [[http://www.fotos.org/galeria/showphoto.php/photo/94459]]
+
 * Readability and Maintenance
 
-- Inline mixing of styles
+- Inline mixing of formatting styles
 - Adherence to common style is hard
 - Dialects hurt speed, depth of comprehension
 - Over-dependence on IDEs
 - Deeply entrenched [[https://en.wikipedia.org/wiki/Yo-yo_problem][Yo-yo Problem]]
+
+.image http://4.bp.blogspot.com/-YvSKGQUqLvo/TeGqk9RNdaI/AAAAAAAACs0/w95EXPlGFF8/s1600/Art%252C+background%252C+desktop%252C+destop%252C+escher.jpg 300 _
 
 * Programmer vs. Developer
 
@@ -57,11 +68,54 @@ Or do you like _Programming_?
 
 * 
 
-.image http://www.unixstickers.com/image/data/stickers/golang/golang.sh.png
+.image http://www.unixstickers.com/image/data/stickers/golang/golang.sh.png 
+.caption [[http://unixstickers.com]]
 
 * How It Started
 .image http://imgs.xkcd.com/comics/compiling.png
-.caption Ken Thompson calling Rob Pike and Robert Griesemer, perhaps
+.caption Ken Thompson calling Rob Pike and Robert Griesemer, perhaps. [[https://xkcd.com/303/]]
+ 
+* Goals to Go
+
+- eliminate slowness
+- eliminate clumsiness
+- improve effectiveness
+- maintain (even improve) scale
+
+Go was designed by and for people who write—and read and debug and maintain—large software systems.
+
+Go's purpose is _not_ research into programming language design.
+
+Go's purpose is to make its designers' programming lives better.
+
+.caption [[http://talks.golang.org/2012/splash.slide]]
+
+* Primary considerations
+
+Must work at scale:
+
+- large programs
+- large teams
+- large number of dependencies
+
+Go should be modern:
+
+- suitable for multicore machines
+- suitable for networked machines
+- suitable for web stuff
+
+.caption [[http://talks.golang.org/2012/splash.slide]]
+
+* Guiding Principles
+- Simplicity, safety, and readability are paramount.
+- Striving for orthogonality in design.
+- Minimal: One way to write a piece of code.
+- It's about *expressing*algorithms*, not the type system.
+- Collective unconscious history of programming languages.
+
+Things of interest should be easy; even if that means not everything is possible.
+
+.caption [[http://talks.golang.org/2015/gophercon-goevolution.slide]]
 
 * Meet The Gophers
 
@@ -70,7 +124,7 @@ Born: 1943, USA
 
 .image http://www.computerhistory.org/fellowawards/media/img/fellows/1997_ken_thompson.jpg
 
-Co-creator of Unix, C and UTF-8
+Co-creator of B (C's predecessor), regex programming, Unix and UTF-8
 IEEE Emanuel R. Piore Award (1982), Turing Award (1983), Computer Pioneer Award (1994), Computer History Museum Fellow (1997), National Medal of Technology (1998), Tsutomu Kanai Award (1999), Japan Prize (2011)
 
 _"When_in_doubt,_use_brute_force"_
@@ -85,9 +139,7 @@ Co-creator of UTF-8, Plan 9 OS, Blit Graphical Terminal, Sam Text Editor...
 Co-Author of "Unix Programming Environment" (1983) and "The Practice of Programming" (1999)
 
 * Robert Griesemer
-Born: 196*, Switzerland, maybe
-
-.image https://upload.wikimedia.org/wikipedia/commons/c/ce/Robert_Griesemer.jpg 300 _
+.image https://upload.wikimedia.org/wikipedia/commons/c/ce/Robert_Griesemer.jpg 360 _
 
 Developer on Sun HotSpot JVM, Google Chubby, Chrome V8 Engine, Sawzall DSL, Strongtalk System
 
@@ -102,3 +154,12 @@ _Also_Contributing_
 *Dmitry*Vyukov*: Parallel Programming Geek, Lock-free Algos
 *Brad*Fitzpatrick*: Livejournal, `memcached`, OpenID
 *Andrew*Gerrand*, *David*Symonds*, *Nigel*Tao*, *Stephen*Ma* and many more
+
+* Closing thoughts
+
+- In 1960, language experts from America and Europe teamed up to create Algol 60.
+- In 1970, the Algol tree split into the C and the Pascal branch.
+- ~40 years later, the two branches join again in Go.
+- Let's see if Go can enjoy an equally long run as its predecessors!
+
+.caption [[http://talks.golang.org/2015/gophercon-goevolution.slide]]

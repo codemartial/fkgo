@@ -7,13 +7,243 @@ Architect, Flipkart
 tahir.hashmi@flipkart.com
 @code_martial
 
-* Release History
+
+
+* 
+.image https://talks.golang.org/2015/how-go-was-made/5years.png 480 _
+.caption Being Awesome. Since 2012
+
+* 
+.image https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Baidu.svg/640px-Baidu.svg.png
+
+*Baidu*Front*End*(BFE)* Rewritten in 100% Go
+
+- HTTP/S, SPDY, Traffic Scheduling, Firewall, DDoS Protection, Data Analysis
+- > 100 Billion Requests/Day
+
+_"Development_efficiency_increased_by_500%"_
+
+_"Less_code,_more_stability"_
+
+* 
+.image https://upload.wikimedia.org/wikipedia/commons/4/46/Bit.ly_Logo.png
+
+*NSQ* Realtime Distributed Message Processing at Scale [[https://github.com/bitly/nsq]]
+
+_"We’ve_built_many_network_daemons_in_C_that_don’t_require_strict,_absolute,_control_over_memory._This_is_where_Go_shines."_
+
+* 
+.image http://blog.canonical.com/wp-content/uploads//2008/08/canonical_horiz.png _ 600
+
+*Juju* Service orchestration framework, by the makers of Ubuntu
+
+- VM Provisioning
+- Service Deployment
+- Monitoring
+- Multiple Cloud Providers
+
+Dave Cheney of Canonical, AU, is a prominent contributor
+
+* 
+.image https://blog.cloudflare.com/content/images/rejected_cloudflare_orange.png.scaled500.png
+
+*Railgun* Data Compression Protocol for Dynamic Web Content
+
+_"We_chose_to_use_Go_for_Railgun_because_Railgun_is_inherently_highly_concurrent."_
+
+* 
+.image https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/CoreOS.svg/2000px-CoreOS.svg.png 200 _
+Linux for the container-cloud
+*etcd* A consistent, HA key-value store using Raft Consensus Protocol.
+*fleet* A distributed `init` system based on `systemd` and `etcd`
+*flannel* An overlay network fabric for Linux containers
+
+_"When_it_comes_to_performance,_so_far_so_good,_Go’s_GC_has_not_been_an_issue."_
+
+"flannel _is_also_one_of_the_projects_where_we_really_got_to_leverage_Go’s_ability_to_handle_low_system_stuff."_
+
+* 
+.image http://www.ebayclassifiedsgroup.com/resources/images/shell/logo-ebayclassifiedsgroup.png
+
+*./fabio* A fast, modern, zero-config load balancing HTTP(S) router for deploying microservices
+
+- 15.000 req/sec on a single 16 core host with moderate memory requirements (~ 60 MB)
+- Go 1.5, `httputil.ReverseProxy`, 1900 lines of code
+- `GOGC=800` for minimal GC overhead (1-2%) with the new concurrent GC implementation
+
+* 
+.image https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2000px-Google_2015_logo.svg.png 120 _
+
+*dl.google.com*, serves downloads like Chrome, Android SDK, etc. Moved from C++ to Go
+_"The_Go_version_is_much_less_code,_more_readable,_more_testable._
+_"[vs._C++]_CPU_was_the_same_and_the_memory_usage_actually_dropped!"_ – bradfitz
+
+*Doodles* On-the-fly image manipulation for Google Doodles.
+
+*Flywheel* Mobile data compression proxy for Chrome
+
+*GRPC* Distributed computing framework. Native server implementation added for Go, besides C++ and Java
+
+*Kubernetes* LXC cluster provisioning and management
+
+* 
+.image https://upload.wikimedia.org/wikipedia/en/a/a9/Heroku_logo.png
+
+*Doozer* Consistent, HA data store built on Paxos
+Tooling and infrastructure components
+
+_"Go's_maniacal_focus_on_simplicity_and_orthogonality_aligns_with_our_view_of_software_engineering."_
+
+_"In_the_same_way_that_garbage_collectors_improve_upon_malloc_and_free,_we_found_that_goroutines_and_channels_improve_upon_the_lock-based_approach_to_concurrency."_
+
+* 
+.image https://customers.influxdb.com/assets/influxdb-light400-f0158e32e3e19795f9c19e572b491b6f6b7a9a4856469ee254df5872f31a501d.png
+A time-series database in Go – storage engine, query engine, indexer and cluster management included
+
+Previously a mix of Scala, Cassandra and Redis
+
+_"The_simplicity_of_the_language_appealed_to_me_as_a_great_strength_over_my_experience_working_with_Scala."_
+
+_"Its_simplicity_of_deployment,_copying_a_file_to_a_server,_can’t_be_beat."_
+
+* 
+.image http://c2976352.cdn.cloudfiles.rackspacecloud.com/ironio-550x200-transp.png
+
+Hosted Messaging and Background Processing Services
+*5*Billion* API Calls, *1*Billion* Messages, *500,000*Hours* of Processing every month
+
+_"30_[Ruby]_Servers_to_2._Second_one_for_redundancy"_
+
+_"After_many,_many_years_of_using_Java,_I_didn’t_want_to_go_back_to_the_JVM."_
+
+_"Performance_has_been_stellar"_
+
+_"Four_years_in,_we’ve_never_had_a_memory_leak_or_problems_related_to_memory."_
+
+* 
+.image https://www.mongodb.com/assets/MongoDB_Brand_Resources/MongoDB-Logo-7db53b4037f9953e9df4f694c758141fcfa022cee1d2ff50749d133d0b70b692.jpg 200 _
+
+*MongoDB*Backup*Service* – Started as a Java Project. Switched to Go
+
+_"Go_is_a_great_choice_for_writing_anything_from_small_scripts_to_large_distributed_applications."_
+
+_"Go_team_has_created_a_sensible,_uniform_development_experience_with_the_holy_trinity_of_tools:_go_build,_test_and_fmt."_
+
+_"Starting_a_Java_project_often_begins_with_a_group_debate:_“Maven_or_Ant?_JUnit_or_TestNG?_Spring_or_Guice?”"_
+
+* 
+.image features/parse.png
+
+Cross-platform application development and hosting. A Facebook company.
+
+Rewrote push-notif backend in Go (ex-Ruby)
+_"We_went_from_250k_connections_per_node_to_1.5_million_without_even_touching_kernel_tuning"_
+
+Rewrote API Server in Go (ex-Ruby)
+_"Our_reliability_improved_by_an_order_of_magnitude"_
+
+_"Time_to_do_a_full_API_server_deploy_with_rolling_restarts_dropped_from_30_minutes_to_3_minutes."_
+
+* 
+.image https://sendgrid.com/blog/wp-content/uploads/2010/10/Untitled.jpg 200 _
+
+Multi-Tenant Transactional and Marketing Email Delivery Platform
+
+Over *20*Billion* Emails sent per month
+
+_"We_needed_to_make_a_shift_in_our_development_language,_and_it_boiled_down_to_a_contest_between_Scala,_Java,_and_Go."_
+
+_"You_can_do_asynchronous_programming_in_Java,_but_it_isn’t_pretty."_
+
+_“We_can_keep_doing_it_in_Perl”_ (counter-argument to we-can-do-it-in-Java)
+
+* 
+.image https://upload.wikimedia.org/wikipedia/en/thumb/9/92/SoundCloud_logo.svg/1280px-SoundCloud_logo.svg.png 200 _
+
+*Roshi* A CRDT based distributed time-series DB (5k lines of Go, of which 2.3k are tests)
+
+*Prometheus* A Microservices Monitoring System
+
+_"Code_reviews_on_a_Go_codebase_tend_to_be_more_about_the_problem_domain_than_the_intricacies_of_the_language"_
+
+_"Once_an_engineer_has_a_working_knowledge_of_Effective_Go,_there_seems_to_be_very_little_friction_in_moving_from_“how_the_application_behaves_today”_to_“how_the_application_should_behave_in_the_ideal_case.”"_
+
+_"We’re_increasingly_turning_to_Go_when_spinning_up_new_backend_projects."_
+
+* 
+.image http://s3.amazonaws.com/resumator/customer_20130930145647_GQE2RFUII6YJ7NF2/logos/20131008222052_splice_logo2x.png
+
+A cloud platform for music creation, collaboration and sharing.
+
+_"Our_developers_spend_much_less_time_talking_about_“how”_to_do_something_and_more_time_discussing_“why”_we_are_doing_it."_
+
+_"With_explicit_and_simple_code,_finding_the_root_cause_is_easier_and_therefore_maintenance_is_reduced_drastically."_
+
+_"Maintaining_a_consistent_code_approach_in_Scala_was_way_harder_than_in_Go"_
+
+_"Programmers_are_misguided_when_they_assume_that_speed_of_execution_and_quality_are_on_two_opposite_ends_of_a_spectrum"_
+
+[[https://splice.com/blog/how-go-shaped-splice-engineering-culture/]]
+
+* 
+.image https://upload.wikimedia.org/wikipedia/commons/0/06/YouTube_logo_2013.svg 120 _
+
+[[http://vitess.io][*Vitess*]] Sharding, Cluster Management, Query Rewriting and Conn. Pooling for *MySQL*
+
+70k Lines of Go (_"Would_have_been_200k_if_it_were_in_C++"_)
+
+_"After_[Concurrent_GC]_rewrite,_garbage_collector_fell_off_our_radar"_
+
+_"2ms_RTT_Latency_from_a_Python_client"_
+
+_"If_you_say,_“Go_doesn't_have_generics”,_you_haven't_used_the_language"_
+
+* Many more I could not mention
+
+- Many startups with not enough volume yet
+- Many large companies with not enough involvement yet (e.g. Twitter)
+- Many don't talk much about Go (incl. some fancy ones like SpaceX, Uber)
+- Repetitive (too many monitoring solutions and Ruby/Python -> Go conversion stories)
+
+* Upcoming Large Projects
+ 
+[[http://www.cockroachlabs.com/][*CockroachDB*]] The unkillable, scale-out, SQL database.
+
+[[https://github.com/vanadium][*Vanadium*]] Distributed Application Development Framework by Google
+
+[[http://www.pachyderm.io/][*Pachyderm*]]  Containerized Data Analytics 
+
+* What Does This Mean?
+
+* Go is Ready for Prime Time
+
+- Handling high volume, business-critical functions
+- Fast, Reliable, Maintainable
+- Attracts converts from all mainstream languages
+- Delivers good long-term experiences to teams
+
+* Go Fills a Niche
+
+- Cloud Provisioning and Monitoring
+- Networking Proxies
+- Service Monitoring and Management
+- Web servers
+
+* Not Really
+
+The "Niche" is Incidental
+
+- Cloud and Services is a hot problem space
+- Competitors don't match its level of concurrency support
+- Infrastructure and Platforms are black-boxes for most developers
+- Application Development needs an order of magnitude higher buy-in
+- Go is a general purpose language suitable for distributed applications in a multi-core environment
+
+* Appendix: Release History
 
 * Go 1.0, March 2012
 - Go is standardized and made GA
-
 (Was Conceived in late 2007; Open Sourced in November, 2009)
-
 
 * Go 1.1, May 2013
 - Bigger Heaps
@@ -43,3 +273,4 @@ tahir.hashmi@flipkart.com
 - Concurrent GC
 - Multi-core enabled by default
 - go tool trace
+
