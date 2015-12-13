@@ -1,0 +1,424 @@
+Go is Different
+"90% Perfect, 100% of the Time"
+
+Tahir Hashmi
+Architect, Flipkart
+tahir.hashmi@flipkart.com
+@code_martial
+
+* Quick Examples
+
+* Hello World
+.play -numbers features/hello.go
+- Stand-alone functions, of course. Who disallows those?
+- Short variable declaration ( `:=` ) infers type from RHS
+- Go source is UTF-8 by specification
+- Hit the "Run" button to execute the code above
+
+* Fibonacci
+.play -numbers features/fib.go
+- Closures, FTW!
+- Buggy implementation. I deferred the fix.
+
+* Fibonacci Redux
+.play -numbers features/fib-defer.go
+- `defer` to execute something before exiting the function
+- Like Java `finally` but not limited to "exceptions"
+- Lambdas, FTW!
+
+* Quicksort
+.play -numbers features/quicksort.go /^var input/,/^}/
+- `[]Foo` is a "slice" of type "Foo". Contiguous, resizeable, random-access sequence
+- `[start:end]` to "reslice". Underlying sequence not copied while reslicing
+
+* Parallel Quicksort
+.play -numbers features/parallel-quicksort.go /^func quicksort/,/^}/
+- Any ol' function/method can be called asynchronously.
+- Using channels (`chan`) to co-ordinate flow, if needed
+
+
+* Syntax
+
+* Syntax is not important...
+
+- unless you're programming
+- or writing tools
+
+Tooling is essential, so Go has a clean syntax.
+Not super small, just clean:
+
+- regular (mostly)
+- only 25 keywords
+- straightforward to parse (no type-specific context required)
+- easy to predict, reason about
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Declarations
+
+Uses Pascal/Modula-style syntax: name before type, more type keywords.
+
+     var fn func([]int) int
+     type T struct { a, b int }
+
+not
+
+    int (*fn)(int[]);
+    struct T { int a, b; }
+
+Easier to parse—no symbol table needed.  Tools become easier to write.
+
+One nice effect: can drop `var` and derive type of variable from expression:
+
+    var buf *bytes.Buffer = bytes.NewBuffer(x) // explicit
+    buf := bytes.NewBuffer(x)                  // derived
+
+For more information:
+
+.link http://golang.org/s/decl-syntax
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Function syntax
+
+Function on type `T`:
+
+    func Abs(t T) float64
+
+Method of type `T`:
+
+    func (t T) Abs() float64
+
+Variable (closure) of type `T`:
+
+    negAbs := func(t T) float64 { return -Abs(t) }
+
+In Go, functions can return multiple values. Common case: `error`.
+
+   func ReadByte() (c byte, err error)
+
+   c, err := ReadByte()
+   if err != nil { ... }
+
+More about errors later.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* No default arguments
+
+Go does not support default function arguments.
+
+Why not?
+
+- too easy to throw in defaulted args to fix design problems
+- encourages too many args
+- too hard to understand the effect of the fn for different combinations of args
+
+Extra verbosity may happen but that encourages extra thought about names.
+
+Related: Go has easy-to-use, type-safe support for variadic functions.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Export syntax
+
+Simple rule:
+
+- upper case initial letter: `Name` is visible to clients of package
+- otherwise: `name` (or `_Name`) is not visible to clients of package
+
+Applies to variables, types, functions, methods, constants, fields....
+
+That Is It.
+
+Not an easy decision.
+One of the most important things about the language.
+
+Can see the visibility of an identifier without discovering the declaration.
+
+Clarity.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Packages and Scope
+
+* 
+Go has very simple scope hierarchy:
+
+- universe
+- package
+- file (for imports only)
+- function
+- block
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Locality of naming
+
+Nuances:
+
+- no implicit `this` in methods (receiver is explicit); always see `rcvr.Field`
+- package qualifier always present for imported names
+- (first component of) every name is always declared in current package
+
+No surprises when importing:
+
+- adding an exported name to my package cannot break your package!
+
+Names do not leak across boundaries.
+
+In C, C++, Java the name `y` could refer to anything
+In Go, `y` (or even `Y`) is always defined within the package.
+In Go, `x.Y` is clear: find `x` locally, `Y` belongs to it.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Function and method lookup
+
+- Method lookup by name only, not type.
+- A type cannot have two methods with the same name, ever.
+- Easy to identify which function/method is referred to.
+- Simple implementation, simpler program, fewer surprises.
+
+Given a method `x.M`, there's only ever one `M` associated with `x`.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Packages
+
+Every Go source file, e.g. `"encoding/json/json.go"`, starts
+
+      package json
+
+where `json` is the "package name", an identifier.
+Package names are usually concise.
+
+To use a package, need to identify it by path:
+
+   import "encoding/json"
+
+And then the package name is used to qualify items from package:
+
+    var dec = json.NewDecoder(reader)
+
+Clarity: can always tell if name is local to package from its syntax: `Name` vs. `pkg.Name`.
+
+Package combines properties of library, name space, and module.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Package paths are unique, not package names
+
+The path is `"encoding/json"` but the package name is `json`.
+The path identifies the package and must be unique.
+Project or company name at root of name space.
+
+    import "google/base/go/log"
+
+Package name might not be unique; can be overridden. These are both `package`log`:
+
+    import "log"                          // Standard package
+    import googlelog "google/base/go/log" // Google-specific package
+
+Every company might have its own `log` package; no need to make the package name unique.
+
+Another: there are many `server` packages in Google's code base.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Remote packages
+
+Package path syntax works with remote repositories.
+The import path is just a string.
+
+Can be a file, can be a URL:
+
+    go get github.com/4ad/doozer   // Command to fetch package
+
+    import "github.com/4ad/doozer" // Doozer client's import statement
+
+    var client doozer.Conn         // Client's use of package
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Dependencies
+
+Dependencies are defined (syntactically) in the language.
+
+Explicit, clear, computable.
+
+    import "encoding/json"
+
+Unused dependencies cause error at compile time.
+
+Efficient: dependencies traversed once per source file...
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Hoisting dependencies
+
+Consider:
+`A` imports `B` imports `C` but `A` does not directly import `C`.
+
+The object code for `B` includes all the information about `C` needed to import `B`.
+Therefore in `A` the line
+
+    import "B"
+
+does not require the compiler to read `C` when compiling `A`.
+
+Also, the object files are designed so the "export" information comes first; compiler doing import does not need to read whole file.
+
+Exponentially less data read than with `#include` files.
+
+With Go in Google, about 40X fanout (recall C++ was 2000x)
+Plus in C++ it's general code that must be parsed; in Go it's just export data.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* No circular imports
+
+Circular imports are illegal in Go.
+
+The big picture in a nutshell:
+
+- occasional minor pain,
+- but great reduction in annoyance overall
+- structural typing makes it less important than with type hierarchies
+- keeps us honest!
+
+Forces clear demarcation between packages.
+
+Simplifies compilation, linking, initialization.
+.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+
+* Error Handling
+
+* The "error" Type
+    type error interface {
+        Error() string
+    }
+
+- Pre-declared identifier. `error` is always in scope. No import needed.
+- Use `errors.New` or `fmt.Errorf` functions to create new error values
+
+* Functions Return Data + Errors
+
+    func (t T) DoSomething(...) (r ReturnType, error)
+
+- Functions can return multiple values
+- Errors are values
+- ∴ Functions can always return errors alongside actual return values
+- Errors can carry rich context
+- Custom error types are easy
+
+* Exception Handling
+    try {
+        Foo foo = something.returnAFoo()
+        Bar bar = otherthing.returnABar()
+        executor.doSomething()
+    } catch(Exception e) {
+        log.Error("Booboo happened", e.toString())
+        rethrow
+    }
+- Can't see which lines in `try` block can throw exceptions
+- Only one exception handled per `try-catch` block (bad for e.g. validators)
+- Mixing of expected and exceptional... exceptions
+- Branching of execution path – exception flow separate from non-exceptional flow
+- Top-level catch-all to prevent program crash
+
+* Error Handling in Go
+	if err := json.Unmarshal([]byte(expected), &expectedObj); err != nil {
+		t.Fatal("Fix this unit test. Error: ", err, expected)
+	}
+
+	responseObj = make(responseT, 0)
+	if err := json.Unmarshal(response[20:], &responseObj); err != nil {
+		t.Error("Could not JSON Decode Response. Error: ", err)
+	}
+- In-line error checking leads to contextual handling
+- Compiler disallows ignoring error while receiving return values from functions
+.play features/error-skip.go /START/,/END/
+
+* Concurrency Primitives
+
+* 
+Over to [[http://talks.golang.org/2012/concurrency.slide][Go Concurrency Patterns]]
+
+* defer, panic and recover
+
+* defer
+
+A *defer*statement* pushes a function call onto a stack (LIFO)
+
+The saved calls is executed immediately after the surrounding function returns
+
+`defer` is usually used to perform clean-up actions
+
+*Syntax*
+
+ DoSomething() // Regular fn. call
+ defer DoSomething() // Deferred fn. call
+
+* Rules of deferred execution
+
+1. Arguments of deferred functions are evaluated when `defer` statement is evaluated
+.play features/defer-eval.go /^func a/,/^}/
+
+2. Multiple deferred functions are called in LIFO order
+.play features/defer-lifo.go /^func a/,/^}/
+
+3. Deferred functions can access and modify surrounding function's return variables
+.play features/defer-return.go /^func a/,/^}/
+
+* panic
+
+- `panic()` is like `throw()` from C++/Java
+- Unwinds the call stack until "recovered" or the carrying goroutine's boundary is reached
+- Unrecovered panics cause the program to crash
+
+.play features/panic.go
+
+* recover
+
+- `recover()` is used to detect a panic.
+- It is useful only as a deferred function. Example:
+.play features/recover.go
+
+* When to Panic
+
+Panic only when:
+
+- There is an error condition that can't be caught at compile time, and...
+- ... the condition only arises due to buggy code. (e.g. Indexing a `nil` slice)
+
+Also,
+
+- panic inside a deep recursion (e.g. LR parsing) to break out to the top level
+- recover the panic and convert it into an error for callers of the recursive function.
+
+* Container Types
+
+* Arrays
+Fixed capacity homogenous sequence
+
+  arr := [5]int // Array of 5 integers
+
+*Slices*
+
+Variable capacity homogenous sequence
+
+  slc   := make([]int)        // 0 element slice of integers
+  slc   := []int{}            // Initializer syntax
+  slc   := make([]int, 5)     // 5 element slice of integers
+  slc   := []int{1, 2, 3, 4}  // Short declaration and initialization
+  slc   := make([]int, 5, 10) // slice with capacity of 10
+  l, c  := len(slc), cap(slc) // find length and capacity
+
+  lo,hi := 1,3
+  rsl   := slc[lo:hi]         // New slice with elements between lo and hi positions only
+  
+Arrays and Slices are bounds checked. Indexing out of bounds causes a panic.
+
+* Maps
+
+Hash-table of key-value pairs of homogenous types
+
+.play features/maps.go /^	/,/OMIT$/
+
+* Considerations
+
+- Maps, Slices and Arrays are not synchronised
+- Map iteration does not preserve the order of insertion
+- Maps can re-order entries on every insertion/deletion
+- Simple container assignment or reslicing does not copy underlying storage
+- Use `copy()` built-in for deep copying arrays/slices
+
+  copied_count := copy(dst, src) // copied_count == min(len(dst), len(src))
