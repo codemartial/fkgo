@@ -186,7 +186,7 @@ _"Programmers_are_misguided_when_they_assume_that_speed_of_execution_and_quality
 [[https://splice.com/blog/how-go-shaped-splice-engineering-culture/]]
 
 * 
-.image https://upload.wikimedia.org/wikipedia/commons/0/06/YouTube_logo_2013.svg 120 _
+.image https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/YouTube_logo_2015.svg/668px-YouTube_logo_2015.svg.png 120 _
 
 [[http://vitess.io][*Vitess*]] Sharding, Cluster Management, Query Rewriting and Conn. Pooling for *MySQL*
 
@@ -274,3 +274,6 @@ The "Niche" is Incidental
 - Multi-core enabled by default
 - go tool trace
 
+* Acknowledgement
+
+Data about Go deployments in production based on [[https://github.com/golang/go/wiki/GoUsers][this list]]
