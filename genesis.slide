@@ -88,7 +88,7 @@ Go's purpose is _not_ research into programming language design.
 
 Go's purpose is to make its designers' programming lives better.
 
-.caption [[http://talks.golang.org/2012/splash.slide]]
+.caption Source: [[http://talks.golang.org/2012/splash.slide]]
 
 * Primary considerations
 
@@ -104,7 +104,7 @@ Go should be modern:
 - suitable for networked machines
 - suitable for web stuff
 
-.caption [[http://talks.golang.org/2012/splash.slide]]
+.caption Source: [[http://talks.golang.org/2012/splash.slide]]
 
 * Guiding Principles
 - Simplicity, safety, and readability are paramount.
@@ -115,7 +115,7 @@ Go should be modern:
 
 Things of interest should be easy; even if that means not everything is possible.
 
-.caption [[http://talks.golang.org/2015/gophercon-goevolution.slide]]
+.caption Source: [[http://talks.golang.org/2015/gophercon-goevolution.slide]]
 
 * Meet The Gophers
 
@@ -162,4 +162,4 @@ _Also_Contributing_
 - ~40 years later, the two branches join again in Go.
 - Let's see if Go can enjoy an equally long run as its predecessors!
 
-.caption [[http://talks.golang.org/2015/gophercon-goevolution.slide]]
+.caption Source: [[http://talks.golang.org/2015/gophercon-goevolution.slide]]
