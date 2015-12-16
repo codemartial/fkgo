@@ -1,12 +1,13 @@
 # fkgo
 *The Go Programming Language: Introduction &amp; Motivation*
 
-The presentations included here are part of a series of trainings conducted by me at work
+The presentations included here are parts of a series of trainings conducted by me at work
 
 The sequencing is as follows:
  
  1. [The Genesis](http://go-talks.appspot.com/github.com/codemartial/fkgo/genesis.slide) Why Invent Go?
  2. [Go in Production](http://go-talks.appspot.com/github.com/codemartial/fkgo/production.slide) Who's Doing It? How's It Doing?
+ 3. [Go is Different](http://go-talks.appspot.com/github.com/codemartial/fkgo/features.slide#1) Feature Walkthrough
 
 ### Reporting Errors
 
