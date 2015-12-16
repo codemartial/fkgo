@@ -3,7 +3,6 @@ Go is Different
 
 Tahir Hashmi
 Architect, Flipkart
-tahir.hashmi@flipkart.com
 @code_martial
 
 * Quick Examples
@@ -72,9 +71,7 @@ One nice effect: can drop `var` and derive type of variable from expression:
     var buf *bytes.Buffer = bytes.NewBuffer(x) // explicit
     buf := bytes.NewBuffer(x)                  // derived
 
-For more information:
-
-.link http://golang.org/s/decl-syntax
+For more information: [[http://golang.org/s/decl-syntax]]
 .caption [[http://talks.golang.org/2012/splash.slide][Pike]]
 
 * Function syntax
@@ -198,7 +195,7 @@ Clarity: can always tell if name is local to package from its syntax: `Name` vs.
 Package combines properties of library, name space, and module.
 .caption [[http://talks.golang.org/2012/splash.slide][Pike]]
 
-* Package paths are unique, not package names
+* Package paths are unique, package names are not
 
 The path is `"encoding/json"` but the package name is `json`.
 The path identifies the package and must be unique.
@@ -243,26 +240,6 @@ Unused dependencies cause error at compile time.
 Efficient: dependencies traversed once per source file...
 .caption [[http://talks.golang.org/2012/splash.slide][Pike]]
 
-* Hoisting dependencies
-
-Consider:
-`A` imports `B` imports `C` but `A` does not directly import `C`.
-
-The object code for `B` includes all the information about `C` needed to import `B`.
-Therefore in `A` the line
-
-    import "B"
-
-does not require the compiler to read `C` when compiling `A`.
-
-Also, the object files are designed so the "export" information comes first; compiler doing import does not need to read whole file.
-
-Exponentially less data read than with `#include` files.
-
-With Go in Google, about 40X fanout (recall C++ was 2000x)
-Plus in C++ it's general code that must be parsed; in Go it's just export data.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
-
 * No circular imports
 
 Circular imports are illegal in Go.
@@ -286,8 +263,8 @@ Simplifies compilation, linking, initialization.
         Error() string
     }
 
-- Pre-declared identifier. `error` is always in scope. No import needed.
-- Use `errors.New` or `fmt.Errorf` functions to create new error values
+- Pre-declared identifier, `error` is always in scope. No import needed.
+- Use `errors.New()` or `fmt.Errorf()` functions to create new error values
 
 * Functions Return Data + Errors
 
@@ -299,17 +276,17 @@ Simplifies compilation, linking, initialization.
 - Errors can carry rich context
 - Custom error types are easy
 
-* Exception Handling
+* Exception Handling Bugbears
     try {
         Foo foo = something.returnAFoo()
         Bar bar = otherthing.returnABar()
         executor.doSomething()
     } catch(Exception e) {
-        log.Error("Booboo happened", e.toString())
+        log.Error("Boo-boo happened", e.toString())
         rethrow
     }
-- Can't see which lines in `try` block can throw exceptions
-- Only one exception handled per `try-catch` block (bad for e.g. validators)
+- Can't guess which lines in `try` block can throw exceptions
+- Only one exception handled per `try-catch` block (bad for validators, etc.)
 - Mixing of expected and exceptional... exceptions
 - Branching of execution path – exception flow separate from non-exceptional flow
 - Top-level catch-all to prevent program crash
@@ -327,20 +304,19 @@ Simplifies compilation, linking, initialization.
 - Compiler disallows ignoring error while receiving return values from functions
 .play features/error-skip.go /START/,/END/
 
-* Concurrency Primitives
-
-* 
-Over to [[http://talks.golang.org/2012/concurrency.slide][Go Concurrency Patterns]]
-
 * defer, panic and recover
 
 * defer
 
 A *defer*statement* pushes a function call onto a stack (LIFO)
 
-The saved calls is executed immediately after the surrounding function returns
+The saved call is executed immediately after the surrounding function returns
 
-`defer` is usually used to perform clean-up actions
+Usually used to perform clean-ups (closing open files, unlocking mutexes, etc)
+
+Like Java `finally` but not just for exceptions.
+
+Like C++ destructors but not just at end of lifetime
 
 *Syntax*
 
@@ -360,9 +336,10 @@ The saved calls is executed immediately after the surrounding function returns
 
 * panic
 
-- `panic()` is like `throw()` from C++/Java
+- `panic()` is like `throw` from C++/Java
 - Unwinds the call stack until "recovered" or the carrying goroutine's boundary is reached
-- Unrecovered panics cause the program to crash
+- Parent goroutines can't recover panics from child goroutines
+- Unrecovered panics cause the program to crash when they hit the goroutine boundary
 
 .play features/panic.go
 
@@ -384,16 +361,26 @@ Also,
 - panic inside a deep recursion (e.g. LR parsing) to break out to the top level
 - recover the panic and convert it into an error for callers of the recursive function.
 
+* Concurrency Primitives
+
+* 
+
+Excellent introduction by Rob Pike:
+
+[[http://talks.golang.org/2012/concurrency.slide][Go Concurrency Patterns]]
+
+Please go through it before moving ahead!
+
 * Container Types
 
 * Arrays
-Fixed capacity homogenous sequence
+Generic fixed capacity homogenous sequence
 
   arr := [5]int // Array of 5 integers
 
 *Slices*
 
-Variable capacity homogenous sequence
+Generic variable capacity homogenous sequence
 
   slc   := make([]int)        // 0 element slice of integers
   slc   := []int{}            // Initializer syntax
@@ -409,16 +396,288 @@ Arrays and Slices are bounds checked. Indexing out of bounds causes a panic.
 
 * Maps
 
-Hash-table of key-value pairs of homogenous types
+Generic hash-table of key-value pairs of homogenous types
 
 .play features/maps.go /^	/,/OMIT$/
 
 * Considerations
 
 - Maps, Slices and Arrays are not synchronised
-- Map iteration does not preserve the order of insertion
 - Maps can re-order entries on every insertion/deletion
+- Successive map iterations can yield keys in different order
 - Simple container assignment or reslicing does not copy underlying storage
-- Use `copy()` built-in for deep copying arrays/slices
+- Use `copy()` built-in for deep copying arrays/slices (not maps)
+.play features/slice-copy.go /^func/,/^}/
 
-  copied_count := copy(dst, src) // copied_count == min(len(dst), len(src))
+* Structs and Methods
+
+* Struct
+
+- C-like composite type
+- Zero initialised on declaration
+.play features/struct.go /^type/,/OMIT$/
+
+* Methods
+Functions with a bound receiver
+.play features/method.go /^func/,/OMIT$/
+
+* Pointer Receiver
+.play features/pointer-receiver.go /^func/,/OMIT$/
+
+* Everything is Pass by Value
+.play features/pass-by-value.go /^func/,/OMIT$/
+
+These semantics apply to stand-alone functions too
+
+* Type Composition
+
+* Form A Whole By Arranging Parts
+
+- A struct can have one or more types as its _parts_
+  type Person struct {
+      id uint64
+  }
+  type Authorization struct {
+      accessTok string
+  }
+  type Player {                   // Structurally equivalent to the previous 'Player' type
+      Person                      // 'id' field embedded from Person
+      Stamina int `json:"stam"`
+      Health  int `json:"health"`
+      Authorization               // 'accessTok' field embedded from Authorization
+  }
+- Anonymous Fields/Methods of the parts get "promoted" to the _whole_
+  Player.id // refers to Person.id as embedded inside Player
+
+* Rules of Embedding
+  type T struct {
+      f Foo
+  }
+  type C struct {
+      b Bar
+  }
+  type S struct {
+      T           // A struct field declarted with a type but no field name is an
+      *C          // anonymous/embedded field. T and *C are embedded fields of type S
+  }
+
+- An embedded field must be a type `T`, or...
+- ... a pointer to non-interface type `C`, and...
+- ... `C` itself may not be a pointer to any other type
+
+* Field Promotion
+  type ( T struct { f Foo }; C struct { b Bar } )
+  type S struct {
+      T           // A struct field declarted with a type but no field name is an
+      *C          // anonymous/embedded field. Here, T and *C are embedded fields of type S
+  }
+
+- Fields of `T` and `C` get promoted to S (e.g. `T.f` gets exposed as `S.f` above)
+- The method sets of `S/*S` include promoted methods with receiver `T`
+- The method sets of `S/*S` include promoted methods with receiver `C` or `*C`
+- Ambiguity in field name resolution causes promotion to fail, needs explicit reference
+- Field promotion is transitive
+- Promoted fields can't be used in composite literal notation for the struct
+  s := S{f: foo}        // invalid
+  s := S{}; s.f = foo   // valid
+  s := S{T{f:foo}, nil} // valid
+
+* Composition is Not Inheritance
+.play features/composition-not-inheritance.go /^type/,/OMIT$/
+What Happened Here?
+
+* `this` is misleading
+.play features/composition-not-inheritance-2.go /^type/,/OMIT$/
+Now you know why not to write `this` or `self` in Go. Because, clarity.
+  
+* Interfaces
+
+* Aside: Being Object Oriented
+Go has
+
+- No implementation inheritance.
+- No subtype polymorphism.
+- No parametric polymorphism (C++ Templates/Java Generics)
+
+*Are*C++*and*Java*Object*Oriented?*
+
+- _"I_made_up_the_term_object-oriented,_and_I_can_tell_you_I_did_not_have_C++_in_mind."_ – Alan Kay [[https://youtu.be/oKg1hTOQXoY?t=10m34s][#]]
+- _"The_big_idea_is_"messaging"_[between_objects]_-_that_is_what_the_kernel_of_Smalltalk/Squeak_is_all_about"_ – Alan Kay [[http://c2.com/cgi/wiki?AlanKayOnMessaging][#]]
+- _"Yes_–_[delegation]_without_an_inheritance_hierarchy._Rather_than_subclassing,_just_use_pure_interfaces."_ – James Gosling on recreating Java differently. [[http://www.artima.com/intv/gosling34.html][#]]
+
+
+* Interfaces: the Go way
+
+Go interfaces are small.
+
+   type Stringer interface {
+       String() string
+   }
+
+A `Stringer` can pretty print itself.
+
+Anything that implements `String` is a `Stringer`.
+
+No explicit `implements` declaration required.
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* An interface example
+
+An `io.Reader` value emits a stream of binary data.
+
+   type Reader interface {
+       Read([]byte) (int, error)
+   }
+
+ByteReader implements an io.Reader that emits a stream of its byte value.
+
+.code go4gophers/reader.go /ByteReader/,/^}/
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+
+* Wrapping interfaces
+
+.code go4gophers/reader.go /LogReader/,/STOP/
+
+Wrapping a `ByteReader` with a `LogReader`:
+
+.play go4gophers/reader.go /START/,/STOP/
+
+By wrapping we compose interface _values_.
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* Chaining interfaces
+
+Wrapping wrappers to build chains:
+
+.code go4gophers/chain.go /START/,/STOP/
+
+More succinctly:
+
+.play go4gophers/chain.go /LogReader{io/
+
+Implement complex behavior by composing small pieces.
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* Programming with interfaces
+
+Interfaces separate data from behavior.
+
+With interfaces, functions can operate on _behavior:_
+
+     // Copy copies from src to dst until either EOF is reached
+     // on src or an error occurs.  It returns the number of bytes
+     // copied and the first error encountered while copying, if any.
+     func Copy(dst Writer, src Reader) (written int64, err error) {
+
+.play go4gophers/chain.go /LogReader{io/
+
+`Copy` can't know about the underlying data structures.
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* A larger interface
+
+`sort.Interface` describes the operations required to sort a collection:
+
+    type Interface interface {
+        Len() int
+        Less(i, j int) bool
+        Swap(i, j int)
+    }
+
+`IntSlice` can sort a slice of ints:
+
+   type IntSlice []int
+   func (p IntSlice) Len() int           { return len(p) }
+   func (p IntSlice) Less(i, j int) bool { return p[i] < p[j] }
+   func (p IntSlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
+
+`sort.Sort` can sort a `[]int` with `IntSlice`:
+
+.play go4gophers/sort.go /START/,/STOP/
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* Another interface example
+
+The `Organ` type describes a body part and can print itself:
+
+.play go4gophers/organs.go /type Organ/,$
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* Sorting organs
+
+The `Organs` type knows how to describe and mutate a slice of organs:
+
+.code go4gophers/organs2.go /PART1/,/PART2/
+
+The `ByName` and `ByWeight` types embed `Organs` to sort by different fields:
+
+.code go4gophers/organs2.go /PART2/,/PART3/
+
+With embedding we compose _types_.
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* Sorting organs (continued)
+
+To sort a `[]*Organ`, wrap it with `ByName` or `ByWeight` and pass it to `sort.Sort`:
+
+.play go4gophers/organs2.go /START/,/STOP/
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* Another wrapper
+
+The `Reverse` function takes a `sort.Interface` and
+returns a `sort.Interface` with an inverted `Less` method:
+
+.code go4gophers/organs3.go /func Reverse/,$
+
+To sort the organs in descending order, compose our sort types with `Reverse`:
+
+.play go4gophers/organs3.go /START/,/STOP/
+
+.caption Source [[https://talks.golang.org/2014/go4gophers.slide]]
+
+* Generics?
+
+_""Really_good_idea,_you_gotta_do_it_this_way"._But_they_[language_designers]_all_had_a_different_version_of_"this_way"._They_usually_had_two_"this_way"s."_ – James Gosling [[https://www.youtube.com/watch?v=9ei-rbULWoA&t=13m26s][#]]
+
+Different Generics implementations make different trade-offs.
+
+Go's designers do not want to choose a trade-off on users' behalf.
+
+Go's features make generics usually unnecessary.
+
+- `slice` and `map` provide built-in, composable, generic containers
+- Interfaces allow writing generic algorithms, bound by behaviour
+- Functions-as-values allow pluggable logic
+- `go generate` for code generation as in C++ Templates
+
+* Summary
+
+Go is Different
+
+- Simplifies code layout
+- Has few, but orthogonal features
+- Provides powerful concurrency primitives
+- Has built-in generic composable containers (`slice`, `map`)
+- Closer to the original OOP architecture as developed in Smalltalk
+- De-emphasizes type hierarchies in favour of composition and delegation
+
+Less is More
+
+* Take a tour of Go
+
+[[http://tour.golang.org/]]
+
+* Acknowledgement
+
+Byline is the title of [[https://talks.golang.org/2014/gocon-tokyo.slide][a talk]] by Brad Fitzpatrick 

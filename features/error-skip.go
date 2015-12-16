@@ -8,7 +8,7 @@ func AFunction() (int, error) {
 }
 
 func main() {
-	i := AFunction()
+	i := AFunction() // Trying not to receive error // HL
 	fmt.Println(i)
 }
 
