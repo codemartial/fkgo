@@ -50,7 +50,7 @@ Not super small, just clean:
 - only 25 keywords
 - straightforward to parse (no type-specific context required)
 - easy to predict, reason about
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Declarations
 
@@ -72,7 +72,7 @@ One nice effect: can drop `var` and derive type of variable from expression:
     buf := bytes.NewBuffer(x)                  // derived
 
 For more information: [[http://golang.org/s/decl-syntax]]
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Function syntax
 
@@ -96,7 +96,7 @@ In Go, functions can return multiple values. Common case: `error`.
    if err != nil { ... }
 
 More about errors later.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * No default arguments
 
@@ -111,7 +111,7 @@ Why not?
 Extra verbosity may happen but that encourages extra thought about names.
 
 Related: Go has easy-to-use, type-safe support for variadic functions.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Export syntax
 
@@ -130,7 +130,7 @@ One of the most important things about the language.
 Can see the visibility of an identifier without discovering the declaration.
 
 Clarity.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Packages and Scope
 
@@ -142,7 +142,7 @@ Go has very simple scope hierarchy:
 - file (for imports only)
 - function
 - block
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Locality of naming
 
@@ -161,7 +161,7 @@ Names do not leak across boundaries.
 In C, C++, Java the name `y` could refer to anything
 In Go, `y` (or even `Y`) is always defined within the package.
 In Go, `x.Y` is clear: find `x` locally, `Y` belongs to it.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Function and method lookup
 
@@ -171,7 +171,7 @@ In Go, `x.Y` is clear: find `x` locally, `Y` belongs to it.
 - Simple implementation, simpler program, fewer surprises.
 
 Given a method `x.M`, there's only ever one `M` associated with `x`.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Packages
 
@@ -193,7 +193,7 @@ And then the package name is used to qualify items from package:
 Clarity: can always tell if name is local to package from its syntax: `Name` vs. `pkg.Name`.
 
 Package combines properties of library, name space, and module.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Package paths are unique, package names are not
 
@@ -211,7 +211,7 @@ Package name might not be unique; can be overridden. These are both `package`log
 Every company might have its own `log` package; no need to make the package name unique.
 
 Another: there are many `server` packages in Google's code base.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Remote packages
 
@@ -225,7 +225,7 @@ Can be a file, can be a URL:
     import "github.com/4ad/doozer" // Doozer client's import statement
 
     var client doozer.Conn         // Client's use of package
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Dependencies
 
@@ -238,7 +238,7 @@ Explicit, clear, computable.
 Unused dependencies cause error at compile time.
 
 Efficient: dependencies traversed once per source file...
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * No circular imports
 
@@ -254,7 +254,7 @@ The big picture in a nutshell:
 Forces clear demarcation between packages.
 
 Simplifies compilation, linking, initialization.
-.caption [[http://talks.golang.org/2012/splash.slide][Pike]]
+.caption [[http://talks.golang.org/2012/splash.slide]]
 
 * Error Handling
 
