@@ -417,9 +417,8 @@ Generic hash-table of key-value pairs of homogenous types
 - Zero initialised on declaration
 .play features/struct.go /^type/,/OMIT$/
 
-* Methods
-Functions with a bound receiver
-.play features/method.go /^func/,/OMIT$/
+* Methods (functions bound to a struct)
+.play features/method.go /^\//,/OMIT$/
 
 * Pointer Receiver
 .play features/pointer-receiver.go /^func/,/OMIT$/

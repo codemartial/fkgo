@@ -9,6 +9,7 @@ type Player struct {
 	accessTok string
 }
 
+// A function defined on the 'Player' type
 func (attacker Player) Attack(defender Player) error {
 	if attacker.Stamina < 5 {
 		return fmt.Errorf("Attacker %d is out of stamina", attacker.id)
