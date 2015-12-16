@@ -20,7 +20,7 @@ Architect, Flipkart
 - Buggy implementation. I deferred the fix.
 
 * Fibonacci Redux
-.play -numbers features/fib-defer.go
+.play -numbers features/fib-defer.go /^func/,/OMIT$/
 - `defer` to execute something before exiting the function
 - Like Java `finally` but not limited to "exceptions"
 - Lambdas, FTW!
@@ -33,7 +33,7 @@ Architect, Flipkart
 * Parallel Quicksort
 .play -numbers features/parallel-quicksort.go /^func quicksort/,/^}/
 - Any ol' function/method can be called asynchronously.
-- Using channels (`chan`) to co-ordinate flow, if needed
+- Use channels (`chan`) to co-ordinate flow, if needed
 
 
 * Syntax
@@ -658,7 +658,7 @@ Go's features make generics usually unnecessary.
 - `slice` and `map` provide built-in, composable, generic containers
 - Interfaces allow writing generic algorithms, bound by behaviour
 - Functions-as-values allow pluggable logic
-- `go generate` for code generation as in C++ Templates
+- `go`generate` for code generation as in C++ Templates
 
 * Summary
 

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func Fibbernachi() func() int {
+func Fibbernacci() func() int {
 	a, b := 0, 1 // Multi-variable assignment // HL
 	fib := func() int {
 		a, b = b, a+b // Referencing a, b from outer scope // HL
@@ -12,7 +12,7 @@ func Fibbernachi() func() int {
 }
 
 func main() {
-	fibonacci := Fibbernachi()
+	fibonacci := Fibbernacci()
 	for i := 0; i < 10; i++ {
 		fmt.Println("Fib(", i, ") =", fibonacci())
 	}

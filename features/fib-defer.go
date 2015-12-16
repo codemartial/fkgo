@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func Fibbernachi() func() int {
+func Fibbernacci() func() int {
 	a, b := 0, 1
 	return func() int {
 		defer func() { a, b = b, a+b }() // HL
@@ -11,8 +11,10 @@ func Fibbernachi() func() int {
 }
 
 func main() {
-	fibonacci := Fibbernachi()
+	fibonacci := Fibbernacci()
 	for i := 0; i < 10; i++ {
 		fmt.Println("Fib(", i, ") =", fibonacci())
 	}
 }
+
+// OMIT
