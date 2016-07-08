@@ -331,7 +331,7 @@ Like C++ destructors but not just at end of lifetime
 2. Multiple deferred functions are called in LIFO order
 .play features/defer-lifo.go /^func a/,/^}/
 
-3. Deferred functions can access and modify surrounding function's return variables
+3. Deferred functions can access and modify surrounding function's return vars
 .play features/defer-return.go /^func a/,/^}/
 
 * panic
