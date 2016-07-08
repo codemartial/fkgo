@@ -120,7 +120,7 @@ _"Performance_has_been_stellar"_
 _"Four_years_in,_we’ve_never_had_a_memory_leak_or_problems_related_to_memory."_
 
 * 
-.image https://www.mongodb.com/assets/MongoDB_Brand_Resources/MongoDB-Logo-7db53b4037f9953e9df4f694c758141fcfa022cee1d2ff50749d133d0b70b692.jpg 200 _
+.image https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Mongodb-logo.jpeg/320px-Mongodb-logo.jpeg
 
 *MongoDB*Backup*Service* – Started as a Java Project. Switched to Go
 
@@ -144,7 +144,7 @@ _"Our_reliability_improved_by_an_order_of_magnitude"_
 _"Time_to_do_a_full_API_server_deploy_with_rolling_restarts_dropped_from_30_minutes_to_3_minutes."_
 
 * 
-.image https://sendgrid.com/blog/wp-content/uploads/2010/10/Untitled.jpg 200 _
+.image https://sendgrid.com/wp-content/themes/sgdotcom/pages/brand/2016/SendGrid-Logo.png 200 _
 
 Multi-Tenant Transactional and Marketing Email Delivery Platform
 
@@ -157,7 +157,7 @@ _"You_can_do_asynchronous_programming_in_Java,_but_it_isn’t_pretty."_
 _“We_can_keep_doing_it_in_Perl”_ (counter-argument to we-can-do-it-in-Java)
 
 * 
-.image https://upload.wikimedia.org/wikipedia/en/thumb/9/92/SoundCloud_logo.svg/1280px-SoundCloud_logo.svg.png 200 _
+.image https://upload.wikimedia.org/wikipedia/en/thumb/9/92/SoundCloud_logo.svg/1280px-SoundCloud_logo.svg.png	180 _
 
 *Roshi* A CRDT based distributed time-series DB (5k lines of Go, of which 2.3k are tests)
 
