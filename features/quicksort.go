@@ -1,26 +1,32 @@
+// WARNING: DO NOT GOFMT
 package main
 
 import "fmt"
+import "math/rand"
 
-var input []int = []int{4, 0, 2, 5, 1, 6, 8, 7, 9, 3}
+var input = rand.Perm(10) // random permutation of numbers [0, 10)
 
 func quicksort(in []int) {
-	switch len(in) {
-	default:
-		pivot := len(in) / 2
-		quicksort(in[:pivot])
-		quicksort(in[pivot:])
-		for i := range in {
-			if i < pivot && in[i] > in[pivot] || i > pivot && in[i] < in[pivot] {
-				in[i], in[pivot] = in[pivot], in[i]
-			}
-		}
-	case 0, 1: // Look Ma, No Fallthrough!
+	if len(in) < 2 {
 		return
 	}
+	start, end, pivot := 0, len(in)-1, in[len(in)/2]
+	for start < end {
+		if in[start] < pivot { start++ }
+		if in[end]   > pivot { end--   }
+
+		if in[start] > in[end] {
+			in[start], in[end] = in[end], in[start]
+		}
+	}
+	quicksort(in[:start])
+	quicksort(in[start:])
 }
 
 func main() {
 	quicksort(input)
 	fmt.Println(input)
+
+	// Sanity Check
+	quicksort(nil)
 }

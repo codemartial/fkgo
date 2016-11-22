@@ -20,14 +20,14 @@ Architect, Flipkart
 - Buggy implementation. I deferred the fix.
 
 * Fibonacci Redux
-.play -numbers features/fib-defer.go /^func/,/OMIT$/
+.play -numbers -edit features/fib-defer.go /^func/,/OMIT$/
 - `defer` to execute something before exiting the function
 - Like Java `finally` but not limited to "exceptions"
 - Lambdas, FTW!
 
 * Quicksort
 .play -numbers features/quicksort.go /^var input/,/^}/
-- `[]Foo` is a "slice" of type "Foo". Contiguous, resizeable, random-access sequence
+- `[]Foo` is a "slice" of type `Foo`. Contiguous, growable, random-access sequence
 - `[start:end]` to "reslice". Underlying sequence not copied while reslicing
 
 * Parallel Quicksort
@@ -46,7 +46,7 @@ Architect, Flipkart
 Tooling is essential, so Go has a clean syntax.
 Not super small, just clean:
 
-- regular (mostly)
+- mostly regular context-free grammar
 - only 25 keywords
 - straightforward to parse (no type-specific context required)
 - easy to predict, reason about
@@ -56,8 +56,8 @@ Not super small, just clean:
 
 Uses Pascal/Modula-style syntax: name before type, more type keywords.
 
-     var fn func([]int) int
-     type T struct { a, b int }
+    var fn func([]int) int
+    type T struct { a, b int }
 
 not
 

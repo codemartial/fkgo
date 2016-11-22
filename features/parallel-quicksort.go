@@ -1,27 +1,29 @@
+// WARNING: DO NOT GOFMT
 package main
 
 import "fmt"
+import "math/rand"
 
-var input []int = []int{4, 0, 2, 5, 1, 6, 8, 7, 9, 3}
+var input = rand.Perm(10)
 
 func quicksort(in []int, done chan<- bool) {
 	defer func() { done <- true }() // HL
-	switch len(in) {
-	default:
-		pivot := len(in) / 2
-		done_left, done_right := make(chan bool), make(chan bool) // HL
-		go quicksort(in[:pivot], done_left)                       // HL
-		go quicksort(in[pivot:], done_right)                      // HL
-		<-done_left                                               // HL
-		<-done_right                                              // HL
-		for i := 0; i < len(in); i++ {
-			if i < pivot && in[i] > in[pivot] || i > pivot && in[i] < in[pivot] {
-				in[i], in[pivot] = in[pivot], in[i]
-			}
-		}
-	case 0, 1:
+	if len(in) < 2 {
 		return
 	}
+	start, end, pivot := 0, len(in)-1, in[len(in)/2]
+	for start < end {
+		if in[start] < pivot { start++ }
+		if in[end]   > pivot { end--   }
+
+		if in[start] > in[end] {
+			in[start], in[end] = in[end], in[start]
+		}
+	}
+	done_left, done_right := make(chan bool), make(chan bool) // HL
+	go quicksort(in[:start], done_left)                       // HL
+	go quicksort(in[start:], done_right)                      // HL
+	_, _ = <-done_left, <-done_right                          // HL
 }
 
 func main() {
@@ -29,4 +31,7 @@ func main() {
 	quicksort(input, done)
 	<-done
 	fmt.Println(input)
+	// Sanity Check
+	quicksort(nil, done)
+	<-done
 }
