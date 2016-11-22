@@ -12,8 +12,8 @@ func quicksort(in []int) {
 	}
 	start, end, pivot := 0, len(in)-1, in[len(in)/2]
 	for start < end {
-		if in[start] < pivot { start++ }
-		if in[end]   > pivot { end--   }
+		for ; in[start] < pivot; start++ {}
+		for ; in[end] > pivot; end-- {}
 
 		if in[start] > in[end] {
 			in[start], in[end] = in[end], in[start]
