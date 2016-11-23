@@ -120,7 +120,7 @@ _"Performance_has_been_stellar"_
 _"Four_years_in,_we’ve_never_had_a_memory_leak_or_problems_related_to_memory."_
 
 * 
-.image https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Mongodb-logo.jpeg/320px-Mongodb-logo.jpeg
+.image https://upload.wikimedia.org/wikipedia/en/4/45/MongoDB-Logo.svg
 
 *MongoDB*Backup*Service* – Started as a Java Project. Switched to Go
 
@@ -129,19 +129,6 @@ _"Go_is_a_great_choice_for_writing_anything_from_small_scripts_to_large_distribu
 _"Go_team_has_created_a_sensible,_uniform_development_experience_with_the_holy_trinity_of_tools:_go_build,_test_and_fmt."_
 
 _"Starting_a_Java_project_often_begins_with_a_group_debate:_“Maven_or_Ant?_JUnit_or_TestNG?_Spring_or_Guice?”"_
-
-* 
-.image features/parse.png
-
-Cross-platform application development and hosting. A Facebook company.
-
-Rewrote push-notif backend in Go (ex-Ruby)
-_"We_went_from_250k_connections_per_node_to_1.5_million_without_even_touching_kernel_tuning"_
-
-Rewrote API Server in Go (ex-Ruby)
-_"Our_reliability_improved_by_an_order_of_magnitude"_
-
-_"Time_to_do_a_full_API_server_deploy_with_rolling_restarts_dropped_from_30_minutes_to_3_minutes."_
 
 * 
 .image https://sendgrid.com/wp-content/themes/sgdotcom/pages/brand/2016/SendGrid-Logo.png 200 _
@@ -157,15 +144,15 @@ _"You_can_do_asynchronous_programming_in_Java,_but_it_isn’t_pretty."_
 _“We_can_keep_doing_it_in_Perl”_ (counter-argument to we-can-do-it-in-Java)
 
 * 
-.image https://upload.wikimedia.org/wikipedia/en/thumb/9/92/SoundCloud_logo.svg/1280px-SoundCloud_logo.svg.png	180 _
-
-*Roshi* A CRDT based distributed time-series DB (5k lines of Go, of which 2.3k are tests)
+.image https://upload.wikimedia.org/wikipedia/commons/f/f4/SoundCloud_logo%2C_orange_color%2C_plain.svg	180 _
 
 *Prometheus* A Microservices Monitoring System
 
+*Roshi* A CRDT based distributed time-series DB (5k lines of Go, of which 2.3k are tests)
+
 _"Code_reviews_on_a_Go_codebase_tend_to_be_more_about_the_problem_domain_than_the_intricacies_of_the_language"_
 
-_"Once_an_engineer_has_a_working_knowledge_of_Effective_Go,_there_seems_to_be_very_little_friction_in_moving_from_“how_the_application_behaves_today”_to_“how_the_application_should_behave_in_the_ideal_case.”"_
+_"Once_an_engineer_has_a_working_knowledge_of_Effective_Go,_there_seems_to_be_very_little_friction_in_moving_from_'how_the_application_behaves_today'_to_'how_the_application_should_behave_in_the_ideal_case.'"_
 
 _"We’re_increasingly_turning_to_Go_when_spinning_up_new_backend_projects."_
 
@@ -185,8 +172,19 @@ _"Programmers_are_misguided_when_they_assume_that_speed_of_execution_and_quality
 [[https://splice.com/blog/how-go-shaped-splice-engineering-culture/]]
 
 * 
+.image https://upload.wikimedia.org/wikipedia/commons/5/58/NewYorkTimes.svg 120 _
+
+[[https://github.com/NYTimes/gizmo][*Gizmo*]] Microservices Development Toolkit
+[[https://github.com/NYTimes/video-transcoding-api][*Video*Transcoding*API*]] Agnostic API to transcode media assets across different cloud services.
+
+_"At_The_New_York_Times,_our_development_teams_have_been_adopting_the_Go_programming_language_over_the_last_three_years_to_build_better_back-end_services."_
+
+_"We_use_Go_for_a_wide_variety_of_tasks,_but_the_most_common_use_throughout_the_company_is_for_building_JSON_APIs."_
+
+* 
 .image https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/YouTube_logo_2015.svg/668px-YouTube_logo_2015.svg.png 120 _
 
+[[https://github.com/youtube/doorman][*doorman*]] Global Distributed Client Side Rate Limiting
 [[http://vitess.io][*Vitess*]] Sharding, Cluster Management, Query Rewriting and Conn. Pooling for *MySQL*
 
 70k Lines of Go (_"Would_have_been_200k_if_it_were_in_C++"_)
@@ -265,13 +263,25 @@ The "Niche" is Incidental
 - Support for Android on ARM
 - Go runtime mostly rewritten in Go
 - Canonical Import Paths
-- go generate
+- `go`generate`
 
 * Go 1.5, Aug 2015
 - Go runtime entirely rewritten in Go (+ Assembly)
 - Concurrent GC
 - Multi-core enabled by default
-- go tool trace
+- `go`tool`trace`
+
+* Go 1.6, Feb 2016
+- Improved GC Performance
+- HTTP/2 Implementation
+- Improved memory safety with CGO
+
+* Go 1.7, Aug 2016
+- New SSA enabled compiler – faster code execution
+- Faster compilation and smaller executables
+- Improved GC Performance
+- New `/net/context` package for RPC contexts
+- Frame Pointer insertion for improved Linux performance debugging
 
 * Acknowledgement
 
