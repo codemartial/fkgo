@@ -1,4 +1,4 @@
-#The Go Programming Language: Introduction &amp; Motivation
+# The Go Programming Language: Introduction &amp; Motivation
 
 The presentations included here are parts of a series of trainings conducted by me at work
 
